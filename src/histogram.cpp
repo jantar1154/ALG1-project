@@ -50,22 +50,19 @@ vector<int> Histogram::get_frequency(const vector<float>& vec, uint16_t parts) {
     const float max = get_max(vec);
     const float interval = (max-min) / parts;
     unordered_map<int, int> frequencies;
+    vector<int> result(parts, 0);
 
     for (int i = 0; i < parts; ++i) frequencies[i] = 0;
 
     for (const float& value : vec) {
         int location = floorf((value-min)/interval);
-        if (value > max || value < min) {
-            exit(1);
-        }
         if (location >= parts) location = parts - 1;
-        frequencies.at(location) += 1;
+        result.at(location) += 1;
     }
 
-    vector<int> result;
-    for (const std::pair<int,int>& p : frequencies) {
-        result.push_back(p.second);
-    }
+    // for (const std::pair<int,int> p : frequencies) {
+    //     result.push_back(p.second);
+    // }
     return result;
 }
 
@@ -90,22 +87,23 @@ void Histogram::hist_draw(std::ostream& ostream) const {
     queue<float> treshold;
 
     // Populate height map
-    for (int i = 0; i < this->width; ++i) {
-        if (round(data_index) >= this->data.size()) break;
-        const float dist = map(this->data.at(round(data_index)), this->lowest, this->highest, 2, this->height);
+    while (floorf(data_index) < this->data.size()) {
+        const float dist = map(this->data.at(floorf(data_index)), this->lowest, this->highest, 2, this->height);
         treshold.push(this->height - dist);
         data_index += space_between;
     } 
 
     // Print graph
+    // y
     for (size_t i = 0; i < this->height; ++i) {
         queue<float> l_tres = treshold;
         size_t j = 0;
-        while (j++ < treshold.size()) {
-            cout << (i > l_tres.front() ? '#' : ' ');
+        // x 
+        while (++j < treshold.size()) {
+            ostream << (i > l_tres.front() ? '#' : ' ');
             l_tres.pop();
         }
-        cout << endl;
+        ostream << endl;
     }
 }
 

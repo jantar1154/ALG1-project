@@ -147,6 +147,11 @@ public:
     */
     static iot_t& iot_find_by_timestamp(const Timestamp& timestamp, vector<iot_t>& data_vector);
 
+    /**
+     * @brief Overloaded operator for `iot_t`.
+     * Compares payload bytes and then Timestamp.
+     * This function is useful for hash map search.
+    */
     inline bool operator<(const iot_t& rhs) const;
 };
 

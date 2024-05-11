@@ -9,7 +9,7 @@ using std::vector;
 
 /**
  * @brief `Histogram` class is used to visually represent a vector of values.
- * Histogram is a visual representation of the disttribution of quantitative data.
+ * Can be used independently of this project.
 */
 class Histogram {
 private:
@@ -21,9 +21,10 @@ private:
 
 public:
     /**
-     *  @brief A contructor for the class `Histogram`. Used to initialize values.
+     *  @brief Contructor for the class `Histogram`. Used to initialize values.
      *  @param data Vector of floats to be represented using a histogram
-     *  @param width Width of the histogram, in characters. Linux terminals usually have ~140 character width.
+     *  @param width Width of the histogram, in characters.
+     *  Linux terminals usually have ~140 character width.
      *  @param height Height of the histogram, in characters.
      *
      *  Example:
@@ -35,6 +36,7 @@ public:
     Histogram(const vector<int>& data, uint16_t width, uint16_t height);
     /**
      *  @brief Prints this histogram into an output stream.
+     *  Histogram will be drawn in vertical position.
      *  @param ostream The output stream the histograph should be printed to.
      *
      *  Example:
@@ -53,9 +55,11 @@ public:
     void hist_draw(std::ostream& ostream) const;
 
     /**
-     * @brief Divides possible values from `vec` and finds frequency of each interval of values from `vec`.
+     * @brief Divides possible values from `vec` and
+     * finds frequency of each interval of values from `vec`.
      * @param vec A vector of data with values to be divided
-     * @param parts A number of parts deciding how many bars will the histogram have
+     * @param parts A number of parts deciding
+     * how many bars will the histogram have
      *
      * @return A vector where index is index of bar and value is the frequency
     */

@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 Payload::Payload() {
-    this->payload_bytes = 0x0000000000;
+    this->payload_bytes = 0x00;
 }
 
 Payload::Payload(const string& input_string) {
@@ -14,7 +14,7 @@ Payload::Payload(const string& input_string) {
     for (int i = 0; i < 5; ++i) {
         const string byte_substr = input_string.substr(i*2, 2);
         const uint8_t byte = stoi(byte_substr, 0, 16);
-        // Shift the byte by 2 bytes left times i and add it do `payload_bytes`
+        // Shift the byte by 2 bytes left i times and add it do `payload_bytes`
         this->payload_bytes |= ((uint64_t)byte << (32-i*8));
     }
 }

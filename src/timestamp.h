@@ -9,7 +9,8 @@ using std::cout;
 using std::endl;
 
 /**
- * @brief `Timestamp` class is used for working with IoT data and decoding a string into usable number format.
+ * @brief `Timestamp` class is used for working with IoT data
+ * and decoding a string into usable number format.
  *
  * Expected format of string to be decoded is "YYYY-MM-DDTHH:MM:SS".
  * 
@@ -78,16 +79,31 @@ public:
     */
     uint8_t get_seconds() const;
 
+    /**
+     * @brief Converts `Timestamp` back into the original string.
+     * @return Original string
+     * 
+     * Example:
+     * @code
+     * Timestamp ts("1998-04-10T12:30:01");
+     * ts.to_string(); // "1998-04-10T12:30:01"
+     * @endcode
+    */
     std::string to_string() const;
 
     /**
-     * @brief Operator `<` compares two Timestamp values and finds out whether the first one is later than the second one, but not the same.
+     * @brief Operator `<` compares two Timestamp values
+     * and finds out whether the first one
+     * is later than the second one, but not the same.
      * @param rhs right hand side
-     * @return `bool` `false` if `lhs` is earlier or the same than `rhs` or `true` if the `lhs` is later than `rhs`
+     * @return `bool` `false` if `lhs` is earlier or the same than `rhs`
+     * or `true` if the `lhs` is later than `rhs`
     */
     bool operator>(const Timestamp& rhs) const;
     /**
-     * @brief Operator `==` compares two Timestamp values and finds out whether they are the same time.
+     * @brief Operator `==` compares two Timestamp values
+     * and finds out whether they are the same time,
+     * with precision to the seconds.
      * @param rhs right hand side
      * @return `bool` `true` if the times are the same, otherwise `false`
     */

@@ -4,10 +4,7 @@
 
 inline bool iot_t::operator<(const iot_t& rhs) const {
     if (this->payload.get_bytes() < rhs.payload.get_bytes()) return true;
-
-    if (this->timestamp.get_year() < rhs.timestamp.get_year()) return true;
-    if (this->timestamp.get_month() < rhs.timestamp.get_month()) return true;
-    if (this->timestamp.get_day() < rhs.timestamp.get_day()) return true;
+    return !(this->timestamp > rhs.timestamp);
 
     return false;
 }

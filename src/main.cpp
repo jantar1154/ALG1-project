@@ -58,10 +58,10 @@ int main(int argc, const char *argv[]) {
     cout << "Data written to " << output_filename << endl;
 
     // Print lowest and highest temperatures and humidities
-    const float min_temp = iot_t::iot_min_temp(data).payload.get_temperature();
-    const float max_temp = iot_t::iot_max_temp(data).payload.get_temperature();
-    const float min_humidity = iot_t::iot_min_humidity(data).payload.get_humidity();
-    const float max_humidity = iot_t::iot_max_humidity(data).payload.get_humidity();
+    float min_temp = iot_t::iot_min_temp(data).payload.get_temperature();
+    float max_temp = iot_t::iot_max_temp(data).payload.get_temperature();
+    float min_humidity = iot_t::iot_min_humidity(data).payload.get_humidity();
+    float max_humidity = iot_t::iot_max_humidity(data).payload.get_humidity();
     cout << "Temperature range: " << min_temp << 'C';
     cout << " - " << max_temp << 'C' << endl;
     cout << "Humidity range: " << min_humidity << '%';
@@ -70,17 +70,17 @@ int main(int argc, const char *argv[]) {
     // Histogram
     const vector<int> temps = get_temp_histogram(data, 8);
     const vector<int> humidities = get_humidity_histogram(data, 8);
-    cout << "humi freqs: " << humidities.size() << endl;
-    Histogram *temp_hist = new Histogram(temps, 140, 30);
+    Histogram *temp_hist = new Histogram(temps, 140, 16);
     temp_hist->hist_draw(cout);
-    Histogram *humidity_hist = new Histogram(humidities, 140, 30);
+    Histogram *humidity_hist = new Histogram(humidities, 140, 16);
     humidity_hist->hist_draw(cout);
 
     delete temp_hist;
     delete humidity_hist;
 
     // Find by timestamp
-    const iot_t& find = iot_t::iot_find_by_timestamp(Timestamp("2024-03-09T12:00:00"), data);
+    const Timestamp ts("2023-05-15T19:00:00");
+    const iot_t& find = iot_t::iot_find_by_timestamp(ts, data);
     cout << "Found!" << endl;
     cout << "Temp: " << find.payload.get_temperature() << 'C' << endl;
     cout << "Humidity: " << find.payload.get_humidity() << '%' << endl;

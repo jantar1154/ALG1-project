@@ -59,10 +59,6 @@ vector<int> Histogram::get_frequency(const vector<float>& vec, uint16_t parts) {
         if (location >= parts) location = parts - 1;
         result.at(location) += 1;
     }
-
-    // for (const std::pair<int,int> p : frequencies) {
-    //     result.push_back(p.second);
-    // }
     return result;
 }
 
@@ -88,7 +84,13 @@ void Histogram::hist_draw(std::ostream& ostream) const {
 
     // Populate height map
     while (floorf(data_index) < this->data.size()) {
-        const float dist = map(this->data.at(floorf(data_index)), this->lowest, this->highest, 2, this->height);
+        const float dist = map(
+                this->data.at(floorf(data_index)),
+                this->lowest,
+                this->highest,
+                2,
+                this->height
+        );
         treshold.push(this->height - dist);
         data_index += space_between;
     } 
